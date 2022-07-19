@@ -28,6 +28,7 @@ function main() {
     document.addEventListener("keydown", onKeyDown);
 
     updateScore();
+    updateHighscore();
     moveFood();
 
     IS_RUNNING = true;
@@ -149,6 +150,7 @@ function gameOver() {
     const gameOverEl = document.getElementById("game-over");
     gameOverEl.classList.remove("hidden");
     IS_RUNNING = false;
+    updateHighscore();
 }
 
 function handleFoodCollision() {
@@ -170,6 +172,21 @@ function collectFood() {
 function updateScore() {
     const scoreEl = document.getElementById("score");
     scoreEl.innerHTML = `Score: ${SCORE}`;
+}
+
+function updateHighscore() {
+    const highscoreEl = document.getElementById("highscore");
+    const highscore = parseInt(window.localStorage.getItem("highscore") || 0);
+
+    if (highscore) {
+        highscoreEl.innerHTML = `Highscore: ${highscore}`;
+    }
+
+    if (SCORE > highscore) {
+        window.localStorage.setItem("highscore", SCORE);
+        highscoreEl.innerHTML = `New Highscore!`;
+        highscoreEl.classList.add("new-highscore");
+    }
 }
 
 function addBody() {
