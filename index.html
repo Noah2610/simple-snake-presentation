@@ -7,7 +7,8 @@
     </head>
     <body>
         <main id="game">
-            <div id="score">Score: 0</div>
+            <div id="score" class="score">Score: 0</div>
+            <div id="highscore" class="score"></div>
 
             <div id="player-bodies">
                 <div class="entity player-body"></div>
@@ -16,6 +17,8 @@
             </div>
             <div id="food" class="entity food"></div>
             <div id="player" class="entity player-head"></div>
+
+            <div id="game-over" class="hidden">Game Over</div>
         </main>
 
         <script type="text/javascript" src="./src/index.js"></script>

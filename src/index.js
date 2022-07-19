@@ -1,6 +1,7 @@
 let FRAME = 0;
 let PLAYER_DIRECTION = "right";
 let SCORE = 0;
+let IS_RUNNING = false;
 
 const CONFIG = {
     width: 640,
@@ -28,6 +29,8 @@ function main() {
 
     updateScore();
     moveFood();
+
+    IS_RUNNING = true;
 
     window.requestAnimationFrame(update);
 }
@@ -64,6 +67,8 @@ function onKeyDown(event) {
 }
 
 function update() {
+    if (!IS_RUNNING) return;
+
     movePlayer();
 
     window.requestAnimationFrame(update);
@@ -141,7 +146,9 @@ function handleBodyCollision() {
 }
 
 function gameOver() {
-    throw new Error("Game Over!");
+    const gameOverEl = document.getElementById("game-over");
+    gameOverEl.classList.remove("hidden");
+    IS_RUNNING = false;
 }
 
 function handleFoodCollision() {
