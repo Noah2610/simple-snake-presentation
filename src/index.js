@@ -14,16 +14,18 @@ function mod(n1, n2) {
 }
 
 function checkCollision(el1, el2) {
-    const el1X = parseInt(el1.style.left);
-    const el1Y = parseInt(el1.style.top);
-    const el2X = parseInt(el2.style.left);
-    const el2Y = parseInt(el2.style.top);
+    const el1X = parseInt(el1.x ?? el1.style.left);
+    const el1Y = parseInt(el1.y ?? el1.style.top);
+    const el2X = parseInt(el2.x ?? el2.style.left);
+    const el2Y = parseInt(el2.y ?? el2.style.top);
 
     return el1X === el2X && el1Y === el2Y;
 }
 
 function main() {
     document.addEventListener("keydown", onKeyDown);
+
+    moveFood();
 
     window.requestAnimationFrame(update);
 }
@@ -165,12 +167,34 @@ function addBody() {
 
 function moveFood() {
     const foodEl = document.getElementById("food");
+    const headEl = document.getElementById("player");
+    const bodyEls = document.getElementsByClassName("player-body");
 
-    const columns = Math.floor(CONFIG.width / CONFIG.step);
-    const rows = Math.floor(CONFIG.height / CONFIG.step);
+    let inCollision = true;
+    let x;
+    let y;
 
-    const x = Math.floor(Math.random() * columns) * CONFIG.step;
-    const y = Math.floor(Math.random() * rows) * CONFIG.step;
+    while (inCollision) {
+        const columns = Math.floor(CONFIG.width / CONFIG.step);
+        const rows = Math.floor(CONFIG.height / CONFIG.step);
+
+        x = Math.floor(Math.random() * columns) * CONFIG.step;
+        y = Math.floor(Math.random() * rows) * CONFIG.step;
+
+        inCollision = false;
+
+        if (checkCollision(headEl, { x, y })) {
+            inCollision = true;
+            continue;
+        }
+
+        for (let i = 0; i < bodyEls.length; i++) {
+            if (checkCollision(bodyEls[i], { x, y })) {
+                inCollision = true;
+                break;
+            }
+        }
+    }
 
     foodEl.style.left = `${x}px`;
     foodEl.style.top = `${y}px`;

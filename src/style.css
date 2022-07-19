@@ -29,20 +29,12 @@ body {
 
 .player-head {
     background-color: #ff0000;
-
-    top: var(--cell-size);
-    left: var(--cell-size);
 }
 
 .player-body {
     background-color: #aa4444;
-
-    top: calc(var(--cell-size) * 2);
-    left: var(--cell-size);
 }
 
 .food {
     background-color: #22aa22;
-    top: calc(var(--cell-size) * 4);
-    left: var(--cell-size);
 }
