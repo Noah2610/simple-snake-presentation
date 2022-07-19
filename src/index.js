@@ -1,7 +1,10 @@
-let FRAME = 0;
-let PLAYER_DIRECTION = "right";
-let SCORE = 0;
-let IS_RUNNING = false;
+const CTX = {
+    frame: 0,
+    playerDirection: "right",
+    score: 0,
+    isRunning: false,
+    didChangeDirection: false,
+};
 
 const CONFIG = {
     width: 640,
@@ -31,36 +34,44 @@ function main() {
     updateHighscore();
     moveFood();
 
-    IS_RUNNING = true;
+    CTX.isRunning = true;
 
     window.requestAnimationFrame(update);
 }
 
 function onKeyDown(event) {
+    if (CTX.didChangeDirection) {
+        return;
+    }
+
     const key = event.key.toUpperCase();
 
     switch (key) {
         case "W": {
-            if (PLAYER_DIRECTION !== "down") {
-                PLAYER_DIRECTION = "up";
+            if (CTX.playerDirection !== "down") {
+                CTX.playerDirection = "up";
+                CTX.didChangeDirection = true;
             }
             break;
         }
         case "S": {
-            if (PLAYER_DIRECTION !== "up") {
-                PLAYER_DIRECTION = "down";
+            if (CTX.playerDirection !== "up") {
+                CTX.playerDirection = "down";
+                CTX.didChangeDirection = true;
             }
             break;
         }
         case "D": {
-            if (PLAYER_DIRECTION !== "left") {
-                PLAYER_DIRECTION = "right";
+            if (CTX.playerDirection !== "left") {
+                CTX.playerDirection = "right";
+                CTX.didChangeDirection = true;
             }
             break;
         }
         case "A": {
-            if (PLAYER_DIRECTION !== "right") {
-                PLAYER_DIRECTION = "left";
+            if (CTX.playerDirection !== "right") {
+                CTX.playerDirection = "left";
+                CTX.didChangeDirection = true;
             }
             break;
         }
@@ -68,17 +79,17 @@ function onKeyDown(event) {
 }
 
 function update() {
-    if (!IS_RUNNING) return;
+    if (!CTX.isRunning) return;
 
     movePlayer();
 
     window.requestAnimationFrame(update);
 
-    FRAME++;
+    CTX.frame++;
 }
 
 function movePlayer() {
-    if (FRAME % CONFIG.moveEveryXFrames !== 0) {
+    if (CTX.frame % CONFIG.moveEveryXFrames !== 0) {
         return;
     }
 
@@ -86,6 +97,8 @@ function movePlayer() {
     movePlayerHead();
     handleBodyCollision();
     handleFoodCollision();
+
+    CTX.didChangeDirection = false;
 }
 
 function movePlayerHead() {
@@ -94,7 +107,7 @@ function movePlayerHead() {
     let x = parseInt(playerEl.style.left) || 0;
     let y = parseInt(playerEl.style.top) || 0;
 
-    switch (PLAYER_DIRECTION) {
+    switch (CTX.playerDirection) {
         case "up": {
             y -= CONFIG.step;
             break;
@@ -149,7 +162,7 @@ function handleBodyCollision() {
 function gameOver() {
     const gameOverEl = document.getElementById("game-over");
     gameOverEl.classList.remove("hidden");
-    IS_RUNNING = false;
+    CTX.isRunning = false;
     updateHighscore();
 }
 
@@ -165,13 +178,13 @@ function handleFoodCollision() {
 function collectFood() {
     moveFood();
     addBody();
-    SCORE++;
+    CTX.score++;
     updateScore();
 }
 
 function updateScore() {
     const scoreEl = document.getElementById("score");
-    scoreEl.innerHTML = `Score: ${SCORE}`;
+    scoreEl.innerHTML = `Score: ${CTX.score}`;
 }
 
 function updateHighscore() {
@@ -182,8 +195,8 @@ function updateHighscore() {
         highscoreEl.innerHTML = `Highscore: ${highscore}`;
     }
 
-    if (SCORE > highscore) {
-        window.localStorage.setItem("highscore", SCORE);
+    if (CTX.score > highscore) {
+        window.localStorage.setItem("highscore", CTX.score);
         highscoreEl.innerHTML = `New Highscore!`;
         highscoreEl.classList.add("new-highscore");
     }
