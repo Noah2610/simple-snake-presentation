@@ -11,6 +11,12 @@ const CONFIG = {
     height: 640,
     step: 32,
     moveEveryXFrames: 10,
+    controls: {
+        up: "W",
+        down: "S",
+        left: "A",
+        right: "D",
+    },
 };
 
 // https://stackoverflow.com/a/4467559/10927893
@@ -47,30 +53,30 @@ function onKeyDown(event) {
     const key = event.key.toUpperCase();
 
     switch (key) {
-        case "W": {
+        case CONFIG.controls.up: {
             if (CTX.playerDirection !== "down") {
                 CTX.playerDirection = "up";
                 CTX.didChangeDirection = true;
             }
             break;
         }
-        case "S": {
+        case CONFIG.controls.down: {
             if (CTX.playerDirection !== "up") {
                 CTX.playerDirection = "down";
                 CTX.didChangeDirection = true;
             }
             break;
         }
-        case "D": {
-            if (CTX.playerDirection !== "left") {
-                CTX.playerDirection = "right";
+        case CONFIG.controls.left: {
+            if (CTX.playerDirection !== "right") {
+                CTX.playerDirection = "left";
                 CTX.didChangeDirection = true;
             }
             break;
         }
-        case "A": {
-            if (CTX.playerDirection !== "right") {
-                CTX.playerDirection = "left";
+        case CONFIG.controls.right: {
+            if (CTX.playerDirection !== "left") {
+                CTX.playerDirection = "right";
                 CTX.didChangeDirection = true;
             }
             break;
@@ -116,12 +122,12 @@ function movePlayerHead() {
             y += CONFIG.step;
             break;
         }
-        case "right": {
-            x += CONFIG.step;
-            break;
-        }
         case "left": {
             x -= CONFIG.step;
+            break;
+        }
+        case "right": {
+            x += CONFIG.step;
             break;
         }
     }
