@@ -38,3 +38,12 @@ body {
 .food {
     background-color: #22aa22;
 }
+
+#score {
+    position: absolute;
+    top: calc(var(--cell-size) * -1);
+
+    color: #ffffff;
+    font-family: monospace;
+    font-size: 24px;
+}

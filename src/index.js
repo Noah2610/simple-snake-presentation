@@ -1,5 +1,6 @@
 let FRAME = 0;
 let PLAYER_DIRECTION = "right";
+let SCORE = 0;
 
 const CONFIG = {
     width: 640,
@@ -25,6 +26,7 @@ function checkCollision(el1, el2) {
 function main() {
     document.addEventListener("keydown", onKeyDown);
 
+    updateScore();
     moveFood();
 
     window.requestAnimationFrame(update);
@@ -147,9 +149,20 @@ function handleFoodCollision() {
     const foodEl = document.getElementById("food");
 
     if (checkCollision(headEl, foodEl)) {
-        moveFood();
-        addBody();
+        collectFood();
     }
+}
+
+function collectFood() {
+    moveFood();
+    addBody();
+    SCORE++;
+    updateScore();
+}
+
+function updateScore() {
+    const scoreEl = document.getElementById("score");
+    scoreEl.innerHTML = `Score: ${SCORE}`;
 }
 
 function addBody() {
