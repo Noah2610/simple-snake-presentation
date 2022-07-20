@@ -157,6 +157,11 @@ $ npm run dev</pre
                 <!-- {{{ -->
                 <h1>HTML Setup</h1>
 
+                <pre class="code color-white text-slim">
+$ touch index.html style.css index.js
+$ code .</pre
+                >
+
                 <div class="code-file">
                     <code class="code title">index.html</code>
                     <pre class="code body color-red">
@@ -169,7 +174,7 @@ $ npm run dev</pre
         &lt;main id=&quot;game&quot;&gt;
         &lt;/main&gt;
 
-        &lt;script type=&quot;text/javascript&quot; src=&quot;./src/index.js&quot;&gt;
+        &lt;script type=&quot;text/javascript&quot; src=&quot;./index.js&quot;&gt;
         &lt;/script&gt;
     &lt;/body&gt;
 &lt;/html&gt;</pre
@@ -255,8 +260,8 @@ body {
                         <pre class="code body color-green body--small">
 .entity {
     position: absolute;
-    width: 640px;
-    height: 640px;
+    width: 32px;
+    height: 32px;
 }
 
 #snake-head {
@@ -291,6 +296,8 @@ body {
     --color-snake-body: #cccccc;
     --color-food: #ff0000;
 }
+
+body { /* ... */ }
 
 #game {
     position: relative;
