@@ -9,7 +9,24 @@ function update() {
     // MOVE SNAKE HEAD
     // Only move every 30 frames.
     if (FRAME % 30 === 0) {
+        // MOVE SNAKE BODIES
         const headEl = document.getElementById("snake-head");
+        const bodyEls = document.getElementsByClassName("snake-body");
+
+        // Loop through body elements BACKWARDS.
+        for (let i = bodyEls.length - 1; i >= 0; i--) {
+            const bodyEl = bodyEls[i];
+            const prevBodyEl = bodyEls[i - 1] || headEl;
+
+            // Set position of previous body element, or of head element.
+            bodyEl.style.left = prevBodyEl.style.left;
+            bodyEl.style.top = prevBodyEl.style.top;
+        }
+
+        // Note, that we move the BODIES first and the HEAD afterwards.
+        // This allows for the first body to copy the OLD position of the head,
+        // then when the head updates it moves to its NEW position.
+        // This way, the body elements will "lag behind" by one position.
 
         let x = parseInt(headEl.style.left) || 0;
         let y = parseInt(headEl.style.top) || 0;
