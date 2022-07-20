@@ -7,7 +7,37 @@ let SNAKE_DIRECTION = "right";
 const STEP = 32;
 
 function main() {
+    // Call the onKeyDown() function when the user presses a key.
+    document.addEventListener("keydown", onKeyDown);
+
     window.requestAnimationFrame(update);
+}
+
+function onKeyDown() {
+    const key = event.key.toLowerCase();
+    switch (key) {
+        case "w":
+            // We aren't allowed to move in the opposite direction.
+            if (SNAKE_DIRECTION !== "down") {
+                SNAKE_DIRECTION = "up";
+            }
+            break;
+        case "s":
+            if (SNAKE_DIRECTION !== "up") {
+                SNAKE_DIRECTION = "down";
+            }
+            break;
+        case "a":
+            if (SNAKE_DIRECTION !== "right") {
+                SNAKE_DIRECTION = "left";
+            }
+            break;
+        case "d":
+            if (SNAKE_DIRECTION !== "left") {
+                SNAKE_DIRECTION = "right";
+            }
+            break;
+    }
 }
 
 function update() {
