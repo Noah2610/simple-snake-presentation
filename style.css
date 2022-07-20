@@ -1,0 +1,21 @@
+body {
+    /* Take up full visible space */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+
+    /* Center child elements */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #666666;
+}
+
+#game {
+    position: relative;
+    width: 640px;
+    height: 640px;
+    background-color: #000000;
+}
