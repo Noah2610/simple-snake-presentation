@@ -1,12 +1,16 @@
 // Used to keep track of current frame number.
 let FRAME = 0;
+// Keep track of the direction our snake is moving into.
+// One of "up", "down", "left", or "right".
+let SNAKE_DIRECTION = "right";
+// Our step size for moving our snake.
+const STEP = 32;
 
 function main() {
     window.requestAnimationFrame(update);
 }
 
 function update() {
-    // MOVE SNAKE HEAD
     // Only move every 30 frames.
     if (FRAME % 30 === 0) {
         moveSnakeBodies();
@@ -30,8 +34,24 @@ function moveSnakeHead() {
     let x = parseInt(headEl.style.left) || 0;
     let y = parseInt(headEl.style.top) || 0;
 
-    // Only move right for now...
-    x += 32;
+    switch (SNAKE_DIRECTION) {
+        case "up": {
+            y -= STEP;
+            break;
+        }
+        case "down": {
+            y += STEP;
+            break;
+        }
+        case "left": {
+            x -= STEP;
+            break;
+        }
+        case "right": {
+            x += STEP;
+            break;
+        }
+    }
 
     headEl.style.left = `${x}px`;
     headEl.style.top = `${y}px`;
