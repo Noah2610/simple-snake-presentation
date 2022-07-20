@@ -13,7 +13,7 @@ function main() {
     window.requestAnimationFrame(update);
 }
 
-function onKeyDown() {
+function onKeyDown(event) {
     const key = event.key.toLowerCase();
     switch (key) {
         case "w":
