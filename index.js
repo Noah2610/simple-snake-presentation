@@ -6,6 +6,9 @@ let SNAKE_DIRECTION = "right";
 // Our step size for moving our snake.
 const STEP = 32;
 
+const GAME_WIDTH = 640;
+const GAME_HEIGHT = 640;
+
 function main() {
     // Call the onKeyDown() function when the user presses a key.
     document.addEventListener("keydown", onKeyDown);
@@ -83,6 +86,10 @@ function moveSnakeHead() {
         }
     }
 
+    // Use modulo operator to limit our x and y positions to 0 - 640.
+    x = mod(x, GAME_WIDTH);
+    y = mod(y, GAME_HEIGHT);
+
     headEl.style.left = `${x}px`;
     headEl.style.top = `${y}px`;
 }
@@ -100,6 +107,14 @@ function moveSnakeBodies() {
         bodyEl.style.left = prevBodyEl.style.left;
         bodyEl.style.top = prevBodyEl.style.top;
     }
+}
+
+// Use this function as the modulo (%) operator instead of the default operator.
+// The built-in JavaScript % operator doesn't handle negative numbers
+// the way we want it to. So I "borrowed" this function from StackOverflow.
+// https://stackoverflow.com/a/4467559/10927893
+function mod(n1, n2) {
+    return ((n1 % n2) + n2) % n2;
 }
 
 // Start our game once the page has loaded.
