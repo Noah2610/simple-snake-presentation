@@ -53,3 +53,27 @@ body {
     left: 64px;
     top: 64px;
 }
+
+#game-over {
+    /* Position over everything. */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+    /* Center the text. */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #ff2222;
+    font-size: 48px;
+    font-family: monospace;
+
+    /* Add a text-shadow for some extra flair! */
+    text-shadow: 0 0 8px #000000;
+}
+
+.hidden {
+    visibility: hidden;
+}
