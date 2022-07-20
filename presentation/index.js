@@ -68,8 +68,8 @@ function setActiveSlide(slideId) {
     setQueryParam("slide", ACTIVE_SLIDE + 1);
 
     const slideEls = document.querySelectorAll(".slide");
-    slideEls.forEach((slideEl) => {
-        if (parseInt(slideEl.getAttribute("data-slide-id")) === ACTIVE_SLIDE) {
+    slideEls.forEach((slideEl, i) => {
+        if (i === ACTIVE_SLIDE) {
             slideEl.classList.add("active");
         } else {
             slideEl.classList.remove("active");
