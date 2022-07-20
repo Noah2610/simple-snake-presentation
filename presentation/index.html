@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Simple Snake Presentation</title>
         <link rel="stylesheet" href="./style.css" />
     </head>
@@ -81,7 +82,7 @@
                                             href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame"
                                             target="_blank"
                                         >
-                                            <code
+                                            <code class="code"
                                                 >window.requestAnimationFrame()</code
                                             >
                                         </a>
@@ -91,7 +92,8 @@
                                             href="https://developer.mozilla.org/en-US/docs/Web/API/Element/classList"
                                             target="_blank"
                                         >
-                                            <code>classList</code> API
+                                            <code class="code">classList</code>
+                                            API
                                         </a>
                                     </li>
                                     <li>
@@ -100,7 +102,7 @@
                                             target="_blank"
                                         >
                                             Nullish Coalescing Operator
-                                            <code>??</code>
+                                            <code class="code">??</code>
                                         </a>
                                     </li>
                                     <li>
@@ -108,13 +110,213 @@
                                             href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage"
                                             target="_blank"
                                         >
-                                            <code>window.localStorage</code> API
+                                            <code class="code"
+                                                >window.localStorage</code
+                                            >
+                                            API
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                         </ul>
                     </div>
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide" data-slide-id="2">
+                <!-- {{{ -->
+                <h1>Package Setup</h1>
+
+                <pre class="code color-white text-slim">
+$ mkdir simple-snake
+$ cd simple-snake
+$ npm init -y
+$ npm install --save-dev live-server
+$ npm run dev</pre
+                >
+
+                <div class="code-file">
+                    <code class="code title">package.json</code>
+                    <pre class="code body color-yellow">
+{
+    "scripts": {
+        "dev": "live-server ."
+    },
+    "devDependencies": {
+        "live-server": "^1.2.2"
+    }
+}
+</pre
+                    >
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide" data-slide-id="3">
+                <!-- {{{ -->
+                <h1>HTML Setup</h1>
+
+                <div class="code-file">
+                    <code class="code title">index.html</code>
+                    <pre class="code body color-red">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Simple Snake&lt;/title&gt;
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;./style.css&quot; /&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;main id=&quot;game&quot;&gt;
+        &lt;/main&gt;
+
+        &lt;script type=&quot;text/javascript&quot; src=&quot;./src/index.js&quot;&gt;
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</pre
+                    >
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide" data-slide-id="4">
+                <!-- {{{ -->
+                <h1>CSS Setup</h1>
+
+                <div class="code-file">
+                    <code class="code title">style.css</code>
+                    <pre class="code body color-green">
+body {
+    /* Take up full visible space */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+
+    /* Center child elements */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #666666;
+}
+
+#game {
+    position: relative;
+    width: 640px;
+    height: 640px;
+    background-color: #000000;
+}</pre
+                    >
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide" data-slide-id="5">
+                <!-- {{{ -->
+                <h1>Setup HTML Game Elements</h1>
+
+                <div class="code-file">
+                    <code class="code title">index.html</code>
+                    <pre class="code body color-red">
+&lt;main id=&quot;game&quot;&gt;
+    &lt;div id=&quot;snake-head&quot;&gt;&lt;/div&gt;
+
+    &lt;div class=&quot;snake-body&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;snake-body&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;snake-body&quot;&gt;&lt;/div&gt;
+
+    &lt;div id=&quot;food&quot;&gt;&lt;/div&gt;
+&lt;/main&gt;</pre
+                    >
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide" data-slide-id="6">
+                <!-- {{{ -->
+                <h1>Styling Game Elements with CSS</h1>
+
+                <div class="container-vert">
+                    <div class="code-file">
+                        <code class="code title">index.html</code>
+                        <pre class="code body color-red body--small">
+&lt;div id=&quot;snake-head&quot; class=&quot;entity&quot;&gt;&lt;/div&gt;
+
+&lt;div class=&quot;snake-body entity&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;snake-body entity&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;snake-body entity&quot;&gt;&lt;/div&gt;
+
+&lt;div id=&quot;food&quot; class=&quot;entity&quot;&gt;&lt;/div&gt;</pre
+                        >
+                    </div>
+
+                    <div class="code-file">
+                        <code class="code title">style.css</code>
+                        <pre class="code body color-green body--small">
+.entity {
+    position: absolute;
+    width: 640px;
+    height: 640px;
+}
+
+#snake-head {
+    background-color: #ffffff;
+}
+
+.snake-body {
+    background-color: #cccccc;
+}
+
+#food {
+    background-color: #ff0000;
+}</pre
+                        >
+                    </div>
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide" data-slide-id="7">
+                <!-- {{{ -->
+                <h1>Refactor using CSS variables</h1>
+
+                <div class="code-file">
+                    <code class="code title">style.css</code>
+                    <pre class="code body color-green body--small">
+/* Define our variables in the :root pseudo element */
+:root {
+    --game-size: 640px;
+    --cell-size: 32px;
+    --color-snake-head: #ffffff;
+    --color-snake-body: #cccccc;
+    --color-food: #ff0000;
+}
+
+#game {
+    position: relative;
+    width: var(--game-size);
+    height: var(--game-size);
+    background-color: #000000;
+}
+
+.entity {
+    position: absolute;
+    width: var(--cell-size);
+    height: var(--cell-size);
+}
+
+#snake-head {
+    background-color: var(--color-snake-head);
+}
+
+.snake-body {
+    background-color: var(--color-snake-body);
+}
+
+#food {
+    background-color: var(--color-food);
+}</pre
+                    >
                 </div>
                 <!-- }}} -->
             </section>

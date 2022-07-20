@@ -9,9 +9,12 @@ function mod(n1, n2) {
 function main() {
     SLIDE_COUNT = document.querySelectorAll(".slide").length;
 
+    setupCopyCode();
+
     setActiveSlide(getSlideIdFromUrl() ?? ACTIVE_SLIDE);
 
     document.addEventListener("keydown", onKeyDown);
+    // document.addEventListener("click", nextSlide);
 }
 
 function getSlideIdFromUrl() {
@@ -76,10 +79,22 @@ function setActiveSlide(slideId) {
 
 function nextSlide() {
     setActiveSlide(ACTIVE_SLIDE + 1);
+    // setActiveSlide((ACTIVE_SLIDE + 1) % SLIDE_COUNT);
 }
 
 function prevSlide() {
     setActiveSlide(ACTIVE_SLIDE - 1);
+}
+
+function setupCopyCode() {
+    const preEls = document.querySelectorAll("pre.code");
+
+    preEls.forEach((preEl) => {
+        preEl.onclick = () => {
+            const text = preEl.innerText;
+            navigator.clipboard.writeText(text);
+        };
+    });
 }
 
 window.onload = main;

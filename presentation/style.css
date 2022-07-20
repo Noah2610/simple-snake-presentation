@@ -47,6 +47,7 @@ ul > li > ul > li:first-child {
 
 h1 {
     margin-top: 0;
+    letter-spacing: 0.1em;
 }
 
 .slide {
@@ -86,14 +87,73 @@ h1 {
     align-items: space-between;
 }
 
+.container-vert {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: space-between;
+}
+
 .small {
     font-size: 0.5em;
     vertical-align: 0.25em;
 }
 
-code {
+.code {
     font-family: monospace;
     letter-spacing: 0.1em;
     color: #cc2222;
     background-color: #202020;
+}
+
+pre.code {
+    position: relative;
+}
+
+/* pre.code::before { */
+/*     content: "Copy"; */
+/*     position: absolute; */
+/*     top: 0; */
+/*     right: 0; */
+/*     margin-top: 0.25em; */
+/*     margin-right: 0.25em; */
+/*     color: #ffffff; */
+/*     cursor: pointer; */
+/* } */
+
+.code-file > .title {
+    color: #ffffff;
+}
+
+.code-file > .body {
+    margin-top: 0;
+    font-size: 0.8em;
+}
+
+.code-file > .body.body--small {
+    font-size: 0.6em;
+}
+
+.color-yellow {
+    color: #d7d787;
+}
+
+.color-white {
+    color: #ffffff;
+}
+
+.color-red {
+    color: #ff2222;
+}
+
+.color-blue {
+    color: #4c869a;
+}
+
+.color-green {
+    color: #afd700;
+}
+
+.text-slim {
+    font-weight: 200;
 }
