@@ -54,7 +54,7 @@ function update() {
         // then when the head updates it moves to its NEW position.
         // This way, the body elements will "lag behind" by one position.
         moveSnakeHead();
-        handleCollisionWithFood();
+        handleFoodCollision();
     }
 
     // Call update() again once the browser
@@ -112,7 +112,7 @@ function moveSnakeBodies() {
     }
 }
 
-function handleCollisionWithFood() {
+function handleFoodCollision() {
     const headEl = document.getElementById("snake-head");
     const foodEl = document.getElementById("food");
 
