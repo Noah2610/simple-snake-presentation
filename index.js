@@ -150,6 +150,7 @@ function randomizeFoodPosition() {
     const columns = Math.floor(GAME_WIDTH / STEP);
     const rows = Math.floor(GAME_HEIGHT / STEP);
 
+    // We set this to true initially so the while loop runs at least once.
     let inCollision = true;
 
     // Continue randomizing position until food is no longer in collision.
