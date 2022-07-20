@@ -55,6 +55,7 @@ function update() {
         // This way, the body elements will "lag behind" by one position.
         moveSnakeHead();
         handleFoodCollision();
+        handleBodyCollision();
     }
 
     // Call update() again once the browser
@@ -126,6 +127,25 @@ function handleFoodCollision() {
     if (isColliding) {
         randomizeFoodPosition();
         spawnSnakeBody();
+    }
+}
+
+function handleBodyCollision() {
+    const headEl = document.getElementById("snake-head");
+    const bodyEls = document.getElementsByClassName("snake-body");
+
+    for (let i = 0; i < bodyEls.length; i++) {
+        const bodyEl = bodyEls[i];
+
+        // We should re-use our collision code from earlier here.
+        const inCollision = false; // TODO: Is headEl in collision with bodyEl?
+
+        if (inCollision) {
+            // GAME OVER!
+            // For now we just crash the game by throwing a string.
+            // This will stop the game...
+            throw "Game Over!";
+        }
     }
 }
 
