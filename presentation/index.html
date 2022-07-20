@@ -84,9 +84,11 @@
 
                     <div>
                         <ul>
-                            <li>Basic <strong>HTML</strong></li>
                             <li>
-                                Some <strong>CSS</strong>
+                                Basic <strong class="color-red">HTML</strong>
+                            </li>
+                            <li>
+                                Some <strong class="color-green">CSS</strong>
                                 <ul class="small">
                                     <li>
                                         <a
@@ -98,7 +100,8 @@
                                 </ul>
                             </li>
                             <li>
-                                Plain <strong>JavaScript</strong>
+                                Plain
+                                <strong class="color-blue">JavaScript</strong>
                                 <ul class="small">
                                     <li>
                                         <a
@@ -853,6 +856,14 @@ function handleFoodCollision() {
     }
 }
 
+function handleBodyCollision() {
+    /* ... */
+
+    const inCollision = <span class="code-highlight">doElementsCollide(headEl, BodyEl);</span>
+
+    /* ... */
+}
+
 function doElementsCollide(el1, el2) {
     const el1X = parseInt(el1El.style.left);
     const el1Y = parseInt(el1El.style.top);
@@ -861,6 +872,48 @@ function doElementsCollide(el1, el2) {
 
     return el1X === el2X && el1Y === el2Y;
 }</pre>
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide">
+                <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
+                <h1>Prevent Food from spawning on Snake</h1>
+
+                <div class="code-file">
+                    <code class="code title">index.js</code>
+                    <pre class="code body color-blue body--small">
+function randomizeFoodPosition() {
+    /* ... */
+
+    const headEl = document.getElementById("snake-head");
+    const bodyEls = document.getElementsByClassName("snake-body");
+
+    // Check collision with snake head.
+    let inCollision = doElementsCollide(foodEl, headEl);
+
+    // If the snake head element is not colliding,
+    // then check for collision with any snake body element.
+    if (!inCollision) {
+        for (let i = 0; i &lt; bodyEls.length; i++) {
+            const bodyEl = bodyEls[i];
+            if (doElementsCollide(foodEl, bodyEl)) {
+                inCollision = true;
+                break;
+            }
+        }
+    }
+
+    // If the new randomized food position is colliding with the
+    // snake head or any snake body then we call the function again
+    // to calculate a new position.
+    if (inCollision) {
+        randomizeFoodPosition();
+    }
+}</pre
+                    >
                 </div>
                 <!-- }}} -->
             </section>
