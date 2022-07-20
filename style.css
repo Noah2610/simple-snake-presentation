@@ -1,3 +1,12 @@
+/* Define our variables in the :root pseudo element */
+:root {
+    --game-size: 640px;
+    --cell-size: 32px;
+    --color-snake-head: #ffffff;
+    --color-snake-body: #cccccc;
+    --color-food: #ff0000;
+}
+
 body {
     /* Take up full visible space */
     position: absolute;
@@ -15,30 +24,30 @@ body {
 
 #game {
     position: relative;
-    width: 640px;
-    height: 640px;
+    width: var(--game-size);
+    height: var(--game-size);
     background-color: #000000;
 }
 
 .entity {
     position: absolute;
-    width: 32px;
-    height: 32px;
+    width: var(--cell-size);
+    height: var(--cell-size);
 }
 
 #snake-head {
-    background-color: #ffffff;
+    background-color: var(--color-snake-head);
 
     /* Debug positioning */
     left: 32px;
 }
 
 .snake-body {
-    background-color: #cccccc;
+    background-color: var(--color-snake-body);
 }
 
 #food {
-    background-color: #ff0000;
+    background-color: var(--color-food);
 
     /* Debug positioning */
     left: 64px;
