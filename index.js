@@ -54,6 +54,7 @@ function update() {
         // then when the head updates it moves to its NEW position.
         // This way, the body elements will "lag behind" by one position.
         moveSnakeHead();
+        handleCollisionWithFood();
     }
 
     // Call update() again once the browser
@@ -108,6 +109,23 @@ function moveSnakeBodies() {
         // Set position of previous body element, or of head element.
         bodyEl.style.left = prevBodyEl.style.left;
         bodyEl.style.top = prevBodyEl.style.top;
+    }
+}
+
+function handleCollisionWithFood() {
+    const headEl = document.getElementById("snake-head");
+    const foodEl = document.getElementById("food");
+
+    const headX = parseInt(headEl.style.left);
+    const headY = parseInt(headEl.style.top);
+    const foodX = parseInt(foodEl.style.left);
+    const foodY = parseInt(foodEl.style.top);
+
+    const isColliding = headX === foodX && headY === foodY;
+
+    if (isColliding) {
+        randomizeFoodPosition();
+        // TODO: Spawn a new snake body!
     }
 }
 
