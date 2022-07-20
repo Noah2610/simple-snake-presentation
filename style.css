@@ -19,3 +19,28 @@ body {
     height: 640px;
     background-color: #000000;
 }
+
+.entity {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+}
+
+#snake-head {
+    background-color: #ffffff;
+
+    /* Debug positioning */
+    left: 32px;
+}
+
+.snake-body {
+    background-color: #cccccc;
+}
+
+#food {
+    background-color: #ff0000;
+
+    /* Debug positioning */
+    left: 64px;
+    top: 64px;
+}
