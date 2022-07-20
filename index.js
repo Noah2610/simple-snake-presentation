@@ -13,6 +13,8 @@ function main() {
     // Call the onKeyDown() function when the user presses a key.
     document.addEventListener("keydown", onKeyDown);
 
+    randomizeFoodPosition();
+
     window.requestAnimationFrame(update);
 }
 
@@ -107,6 +109,21 @@ function moveSnakeBodies() {
         bodyEl.style.left = prevBodyEl.style.left;
         bodyEl.style.top = prevBodyEl.style.top;
     }
+}
+
+function randomizeFoodPosition() {
+    const foodEl = document.getElementById("food");
+
+    // Calculate amount of cells per row / column.
+    const columns = Math.floor(GAME_WIDTH / STEP);
+    const rows = Math.floor(GAME_HEIGHT / STEP);
+
+    // Get random cell and multiply by STEP to get actual position.
+    const x = Math.floor(Math.random() * columns) * STEP;
+    const y = Math.floor(Math.random() * rows) * STEP;
+
+    foodEl.style.left = `${x}px`;
+    foodEl.style.top = `${y}px`;
 }
 
 // Use this function as the modulo (%) operator instead of the default operator.
