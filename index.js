@@ -117,12 +117,7 @@ function handleFoodCollision() {
     const headEl = document.getElementById("snake-head");
     const foodEl = document.getElementById("food");
 
-    const headX = parseInt(headEl.style.left);
-    const headY = parseInt(headEl.style.top);
-    const foodX = parseInt(foodEl.style.left);
-    const foodY = parseInt(foodEl.style.top);
-
-    const isColliding = headX === foodX && headY === foodY;
+    const isColliding = doElementsCollide(headEl, foodEl);
 
     if (isColliding) {
         randomizeFoodPosition();
@@ -137,8 +132,7 @@ function handleBodyCollision() {
     for (let i = 0; i < bodyEls.length; i++) {
         const bodyEl = bodyEls[i];
 
-        // We should re-use our collision code from earlier here.
-        const inCollision = false; // TODO: Is headEl in collision with bodyEl?
+        const inCollision = doElementsCollide(headEl, bodyEl);
 
         if (inCollision) {
             // GAME OVER!
@@ -176,6 +170,15 @@ function spawnSnakeBody() {
     newBodyEl.style.top = lastBodyEl.style.top;
 
     bodyContainerEl.appendChild(newBodyEl);
+}
+
+function doElementsCollide(el1, el2) {
+    const el1X = parseInt(el1.style.left);
+    const el1Y = parseInt(el1.style.top);
+    const el2X = parseInt(el2.style.left);
+    const el2Y = parseInt(el2.style.top);
+
+    return el1X === el2X && el1Y === el2Y;
 }
 
 // Use this function as the modulo (%) operator instead of the default operator.
