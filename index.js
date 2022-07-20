@@ -150,12 +150,35 @@ function randomizeFoodPosition() {
     const columns = Math.floor(GAME_WIDTH / STEP);
     const rows = Math.floor(GAME_HEIGHT / STEP);
 
-    // Get random cell and multiply by STEP to get actual position.
-    const x = Math.floor(Math.random() * columns) * STEP;
-    const y = Math.floor(Math.random() * rows) * STEP;
+    let inCollision = true;
 
-    foodEl.style.left = `${x}px`;
-    foodEl.style.top = `${y}px`;
+    // Continue randomizing position until food is no longer in collision.
+    while (inCollision) {
+        // Get random cell and multiply by STEP to get actual position.
+        const x = Math.floor(Math.random() * columns) * STEP;
+        const y = Math.floor(Math.random() * rows) * STEP;
+
+        foodEl.style.left = `${x}px`;
+        foodEl.style.top = `${y}px`;
+
+        const headEl = document.getElementById("snake-head");
+        const bodyEls = document.getElementsByClassName("snake-body");
+
+        // Check collision with snake head.
+        inCollision = doElementsCollide(foodEl, headEl);
+
+        // If the snake head element is not colliding,
+        // then check for collision with any snake body element.
+        if (!inCollision) {
+            for (let i = 0; i < bodyEls.length; i++) {
+                const bodyEl = bodyEls[i];
+                if (doElementsCollide(foodEl, bodyEl)) {
+                    inCollision = true;
+                    break;
+                }
+            }
+        }
+    }
 }
 
 function spawnSnakeBody() {
