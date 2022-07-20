@@ -1,6 +1,6 @@
 const CTX = {
     frame: 0,
-    playerDirection: "right",
+    snakeDirection: "right",
     score: 0,
     isRunning: false,
     didChangeDirection: false,
@@ -54,29 +54,29 @@ function onKeyDown(event) {
 
     switch (key) {
         case CONFIG.controls.up: {
-            if (CTX.playerDirection !== "down") {
-                CTX.playerDirection = "up";
+            if (CTX.snakeDirection !== "down") {
+                CTX.snakeDirection = "up";
                 CTX.didChangeDirection = true;
             }
             break;
         }
         case CONFIG.controls.down: {
-            if (CTX.playerDirection !== "up") {
-                CTX.playerDirection = "down";
+            if (CTX.snakeDirection !== "up") {
+                CTX.snakeDirection = "down";
                 CTX.didChangeDirection = true;
             }
             break;
         }
         case CONFIG.controls.left: {
-            if (CTX.playerDirection !== "right") {
-                CTX.playerDirection = "left";
+            if (CTX.snakeDirection !== "right") {
+                CTX.snakeDirection = "left";
                 CTX.didChangeDirection = true;
             }
             break;
         }
         case CONFIG.controls.right: {
-            if (CTX.playerDirection !== "left") {
-                CTX.playerDirection = "right";
+            if (CTX.snakeDirection !== "left") {
+                CTX.snakeDirection = "right";
                 CTX.didChangeDirection = true;
             }
             break;
@@ -87,33 +87,33 @@ function onKeyDown(event) {
 function update() {
     if (!CTX.isRunning) return;
 
-    movePlayer();
+    moveSnake();
 
     window.requestAnimationFrame(update);
 
     CTX.frame++;
 }
 
-function movePlayer() {
+function moveSnake() {
     if (CTX.frame % CONFIG.moveEveryXFrames !== 0) {
         return;
     }
 
-    movePlayerBodies();
-    movePlayerHead();
+    moveSnakeBodies();
+    moveSnakeHead();
     handleBodyCollision();
     handleFoodCollision();
 
     CTX.didChangeDirection = false;
 }
 
-function movePlayerHead() {
-    const playerEl = document.getElementById("player");
+function moveSnakeHead() {
+    const snakeEl = document.getElementById("snake-head");
 
-    let x = parseInt(playerEl.style.left) || 0;
-    let y = parseInt(playerEl.style.top) || 0;
+    let x = parseInt(snakeEl.style.left) || 0;
+    let y = parseInt(snakeEl.style.top) || 0;
 
-    switch (CTX.playerDirection) {
+    switch (CTX.snakeDirection) {
         case "up": {
             y -= CONFIG.step;
             break;
@@ -135,13 +135,13 @@ function movePlayerHead() {
     x = mod(x, CONFIG.width);
     y = mod(y, CONFIG.height);
 
-    playerEl.style.left = `${x}px`;
-    playerEl.style.top = `${y}px`;
+    snakeEl.style.left = `${x}px`;
+    snakeEl.style.top = `${y}px`;
 }
 
-function movePlayerBodies() {
-    const headEl = document.getElementById("player");
-    const bodyEls = document.getElementsByClassName("player-body");
+function moveSnakeBodies() {
+    const headEl = document.getElementById("snake-head");
+    const bodyEls = document.getElementsByClassName("snake-body");
 
     for (let i = bodyEls.length - 1; i >= 0; i--) {
         const bodyEl = bodyEls[i];
@@ -153,8 +153,8 @@ function movePlayerBodies() {
 }
 
 function handleBodyCollision() {
-    const headEl = document.getElementById("player");
-    const bodyEls = document.getElementsByClassName("player-body");
+    const headEl = document.getElementById("snake-head");
+    const bodyEls = document.getElementsByClassName("snake-body");
 
     for (let i = 0; i < bodyEls.length; i++) {
         const bodyEl = bodyEls[i];
@@ -173,7 +173,7 @@ function gameOver() {
 }
 
 function handleFoodCollision() {
-    const headEl = document.getElementById("player");
+    const headEl = document.getElementById("snake-head");
     const foodEl = document.getElementById("food");
 
     if (checkCollision(headEl, foodEl)) {
@@ -209,11 +209,11 @@ function updateHighscore() {
 }
 
 function addBody() {
-    const bodyContainerEl = document.getElementById("player-bodies");
+    const bodyContainerEl = document.getElementById("snake-bodies");
     const lastBodyEl = bodyContainerEl.lastElementChild;
 
     const bodyEl = document.createElement("div");
-    bodyEl.classList.add("entity", "player-body");
+    bodyEl.classList.add("entity", "snake-body");
 
     bodyEl.style.left = lastBodyEl.style.left;
     bodyEl.style.top = lastBodyEl.style.top;
@@ -223,8 +223,8 @@ function addBody() {
 
 function moveFood() {
     const foodEl = document.getElementById("food");
-    const headEl = document.getElementById("player");
-    const bodyEls = document.getElementsByClassName("player-body");
+    const headEl = document.getElementById("snake-head");
+    const bodyEls = document.getElementsByClassName("snake-body");
 
     let inCollision = true;
     let x;

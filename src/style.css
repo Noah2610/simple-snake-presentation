@@ -1,6 +1,9 @@
 :root {
     --game-size: 640px;
     --cell-size: 32px;
+    --color-snake-head: #ffffff;
+    --color-snake-body: #cccccc;
+    --color-food: #ff0000;
 }
 
 body {
@@ -8,7 +11,7 @@ body {
     margin: 0;
     width: 100%;
     height: 100%;
-    background-color: #000000;
+    background-color: #666666;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,7 +23,7 @@ body {
     position: relative;
     width: var(--game-size);
     height: var(--game-size);
-    background-color: #cccccc;
+    background-color: #000000;
 }
 
 .entity {
@@ -29,23 +32,23 @@ body {
     height: var(--cell-size);
 }
 
-.player-head {
-    background-color: #ff0000;
+#snake-head {
+    background-color: var(--color-snake-head);
 }
 
-.player-body {
-    background-color: #aa4444;
+.snake-body {
+    background-color: var(--color-snake-body);
 }
 
 .food {
-    background-color: #22aa22;
+    background-color: var(--color-food);
 }
 
 .score {
     position: absolute;
     top: calc(var(--cell-size) * -1);
 
-    color: #ffffff;
+    color: #000000;
     font-size: 24px;
 }
 
