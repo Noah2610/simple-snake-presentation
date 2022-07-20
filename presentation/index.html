@@ -10,6 +10,8 @@
         <main>
             <section class="slide">
                 <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
                 <h1>Hello CodeCool!</h1>
 
                 <ul>
@@ -48,6 +50,8 @@
 
             <section class="slide">
                 <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
                 <h1>Simple Snake Game</h1>
 
                 <div class="container-horz">
@@ -126,11 +130,47 @@
 
             <section class="slide">
                 <!-- {{{ -->
+                <a
+                    href=""
+                    target="_blank"
+                    class="slide-number slide-number--highlight"
+                ></a>
+
+                <h1>Troubleshooting</h1>
+
+                <p>Stuck while coding along?</p>
+                <p class="text-slim">
+                    Open up these slides at
+                    <br />
+                    <a href="https://simple-snake-slides-noahro.vercel.app/"
+                        >simple-snake-slides-noahro.vercel.app</a
+                    >
+                    <br />
+                    and compare your code to the code on the slides.
+                </p>
+
+                <p>Still not working?</p>
+
+                <p class="text-slim">
+                    In the top-right corner of each slide is a link to the code
+                    at that stage.
+                </p>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide">
+                <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
                 <h1>Package Setup</h1>
 
                 <pre class="code color-white text-slim">
 $ mkdir simple-snake
 $ cd simple-snake
+</pre
+                >
+                <div>If you have <code class="code">npm</code> installed:</div>
+                <pre class="code color-white text-slim">
 $ npm init -y
 $ npm install --save-dev live-server
 $ npm run dev</pre
@@ -155,6 +195,8 @@ $ npm run dev</pre
 
             <section class="slide">
                 <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
                 <h1>HTML Setup</h1>
 
                 <pre class="code color-white text-slim">
@@ -180,11 +222,17 @@ $ code .</pre
 &lt;/html&gt;</pre
                     >
                 </div>
+
+                <div>
+                    Open <code class="code">index.html</code> in your browser.
+                </div>
                 <!-- }}} -->
             </section>
 
             <section class="slide">
                 <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
                 <h1>CSS Setup</h1>
 
                 <div class="code-file">
@@ -218,6 +266,8 @@ body {
 
             <section class="slide">
                 <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
                 <h1>Setup HTML Game Elements</h1>
 
                 <div class="code-file">
@@ -239,20 +289,21 @@ body {
 
             <section class="slide">
                 <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
                 <h1>Styling Game Elements with CSS</h1>
 
                 <div class="container-vert">
                     <div class="code-file">
                         <code class="code title">index.html</code>
                         <pre class="code body color-red body--small">
-&lt;div id=&quot;snake-head&quot; class=&quot;entity&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;snake-head&quot; <span class="code-highlight">class=&quot;entity&quot;</span>&gt;&lt;/div&gt;
 
-&lt;div class=&quot;snake-body entity&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;snake-body entity&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;snake-body entity&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;snake-body <span class="code-highlight">entity</span>&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;snake-body <span class="code-highlight">entity</span>&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;snake-body <span class="code-highlight">entity</span>&quot;&gt;&lt;/div&gt;
 
-&lt;div id=&quot;food&quot; class=&quot;entity&quot;&gt;&lt;/div&gt;</pre
-                        >
+&lt;div id=&quot;food&quot; <span class="code-highlight">class=&quot;entity&quot;</span>&gt;&lt;/div&gt;</pre>
                     </div>
 
                     <div class="code-file">
@@ -283,6 +334,8 @@ body {
 
             <section class="slide">
                 <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
                 <h1>Refactor using CSS variables</h1>
 
                 <div class="code-file">
@@ -301,35 +354,36 @@ body { /* ... */ }
 
 #game {
     position: relative;
-    width: var(--game-size);
-    height: var(--game-size);
+    width: <span class="code-highlight">var(--game-size);</span>
+    height: <span class="code-highlight">var(--game-size);</span>
     background-color: #000000;
 }
 
 .entity {
     position: absolute;
-    width: var(--cell-size);
-    height: var(--cell-size);
+    width: <span class="code-highlight">var(--cell-size);</span>
+    height: <span class="code-highlight">var(--cell-size);</span>
 }
 
 #snake-head {
-    background-color: var(--color-snake-head);
+    background-color: <span class="code-highlight">var(--color-snake-head);</span>
 }
 
 .snake-body {
-    background-color: var(--color-snake-body);
+    background-color: <span class="code-highlight">var(--color-snake-body);</span>
 }
 
 #food {
-    background-color: var(--color-food);
-}</pre
-                    >
+    background-color: <span class="code-highlight">var(--color-food);</span>
+}</pre>
                 </div>
                 <!-- }}} -->
             </section>
 
             <section class="slide">
                 <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
                 <h1>Setup JavaScript and Game Loop</h1>
 
                 <div class="code-file">
@@ -361,6 +415,8 @@ window.onload = main;</pre
 
             <section class="slide">
                 <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
                 <h1>Move Snake Head</h1>
 
                 <div class="code-file">
@@ -391,6 +447,8 @@ function update() {
 
             <section class="slide">
                 <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
                 <h1>Move Snake Bodies</h1>
 
                 <div class="code-file">
@@ -428,6 +486,8 @@ function update() {
 
             <section class="slide">
                 <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
                 <h1>Refactor Snake Movement Code</h1>
 
                 <div class="code-file">
@@ -464,6 +524,8 @@ function moveSnakeBodies() {
 
             <section class="slide">
                 <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
                 <h1>Move Snake in different directions</h1>
 
                 <div class="code-file">
@@ -507,6 +569,8 @@ function moveSnakeHead() {
 
             <section class="slide">
                 <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
                 <h1>User Input</h1>
 
                 <div class="code-file">
@@ -546,6 +610,237 @@ function onKeyDown(event) {
     }
 }</pre
                     >
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide">
+                <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
+                <h1>Make Snake Loop Around</h1>
+
+                <div class="code-file">
+                    <code class="code title">index.js</code>
+                    <pre class="code body color-blue body--small">
+const GAME_WIDTH = 640;
+const GAME_HEIGHT = 640;
+
+function moveSnakeHead() {
+    /* ... */
+
+    // Use modulo operator to limit our x and y positions to 0 - 640.
+    x = mod(x, GAME_WIDTH);
+    y = mod(y, GAME_HEIGHT);
+
+    snakeEl.style.left = `${x}px`;
+    snakeEl.style.top = `${y}px`;
+}
+
+// Use this function as the modulo (%) operator instead of the default operator.
+// The built-in JavaScript % operator doesn't handle negative numbers
+// the way we want it to. So I "borrowed" this function from StackOverflow.
+// <a href="https://stackoverflow.com/a/4467559/10927893" target="_blank">https://stackoverflow.com/a/4467559/10927893</a>
+function mod(n1, n2) {
+    return ((n1 % n2) + n2) % n2;
+}</pre>
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide">
+                <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
+                <h1>Randomize Food Position</h1>
+
+                <div class="code-file">
+                    <code class="code title">index.js</code>
+                    <pre class="code body color-blue body--small">
+function main() {
+    /* ... */
+
+    randomizeFoodPosition();
+
+    /* ... */
+}
+
+function randomizeFoodPosition() {
+    const foodEl = document.getElementById("food");
+
+    // Calculate amount of cells per row / column.
+    const columns = Math.floor(GAME_WIDTH / STEP);
+    const rows = Math.floor(GAME_HEIGHT / STEP);
+
+    // Get random cell and multiply by STEP to get actual position.
+    const x = Math.floor(Math.random() * columns) * STEP;
+    const y = Math.floor(Math.random() * rows) * STEP;
+
+    foodEl.style.left = `${x}px`;
+    foodEl.style.top = `${y}px`;
+}</pre
+                    >
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide">
+                <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
+                <h1>Handle Collision with Food</h1>
+
+                <div class="code-file">
+                    <code class="code title">index.js</code>
+                    <pre class="code body color-blue body--small">
+function update() {
+    /* ... */
+
+    moveSnakeBodies();
+    moveSnakeHead();
+    <span class="code-highlight">handleFoodCollision();</span>
+
+    /* ... */
+}
+
+function handleFoodCollision() {
+    const headEl = document.getElementById("snake-head");
+    const foodEl = document.getElementById("food");
+
+    const headX = parseInt(headEl.style.left);
+    const headY = parseInt(headEl.style.top);
+    const foodX = parseInt(foodEl.style.left);
+    const foodY = parseInt(foodEl.style.top);
+
+    const isColliding = headX === foodX && headY === foodY;
+
+    if (isColliding) {
+        randomizeFoodPosition();
+        // TODO: Spawn a new snake body!
+    }
+}</pre>
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide">
+                <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
+                <h1>Spawn a new Snake Body</h1>
+
+                <div class="container-vert">
+                    <div class="code-file">
+                        <code class="code title">index.html</code>
+                        <pre class="code body color-red">
+&lt;div id=&quot;snake-bodies&quot;&gt;
+    &lt;div class=&quot;snake-body entity&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;snake-body entity&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;snake-body entity&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</pre
+                        >
+                    </div>
+
+                    <div class="code-file">
+                        <code class="code title">index.js</code>
+                        <pre class="code body color-blue body--small">
+function handleFoodCollision() {
+    /* ... */
+
+    if (isColliding) {
+        randomizeFoodPosition();
+        <span class="code-highlight">spawnSnakeBody();</span>
+    }
+}
+
+function spawnSnakeBody() {
+    const bodyContainerEl = document.getElementById("snake-bodies");
+    const lastBodyEl = bodyContainerEl.lastElementChild;
+
+    const newBodyEl = document.createElement("div");
+    newBodyEl.classList.add("entity", "snake-body");
+
+    // Set new body's position to the position of the last existing body element
+    newBodyEl.style.left = lastBodyEl.style.left;
+    newBodyEl.style.top = lastBodyEl.style.top;
+
+    bodyContainerEl.appendChild(newBodyEl);
+}</pre>
+                    </div>
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide">
+                <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
+                <h1>Handle Collision with Body</h1>
+
+                <div class="code-file">
+                    <code class="code title">index.js</code>
+                    <pre class="code body color-blue body--small">
+function update() {
+    /* ... */
+
+    moveSnakeBodies();
+    moveSnakeHead();
+    handleFoodCollision();
+    <span class="code-highlight">handleBodyCollision();</span>
+
+    /* ... */
+}
+
+function handleBodyCollision() {
+    const headEl = document.getElementById("snake-head");
+    const bodyEls = document.getElementsByClassName("snake-body");
+
+    for (let i = 0; i &lt; bodyEls.length; i++) {
+        const bodyEl = bodyEls[i];
+
+        // We should re-use our collision code from earlier here.
+        const inCollision = /* Is headEl in collision with bodyEl? */;
+
+        if (inCollision) {
+            // GAME OVER!
+            // For now we just crash the game by throwing a string.
+            // This will stop the game...
+            throw "Game Over!";
+        }
+    }
+}</pre>
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide">
+                <!-- {{{ -->
+                <a href="" target="_blank" class="slide-number"></a>
+
+                <h1>Refactor Collision Checking</h1>
+
+                <div class="code-file">
+                    <code class="code title">index.js</code>
+                    <pre class="code body color-blue body--small">
+function handleFoodCollision() {
+    /* ... */
+
+    const isColliding = <span class="code-highlight">doElementsCollide(headEl, foodEl);</span>
+
+    if (isColliding) {
+        randomizeFoodPosition();
+        spawnSnakeBody();
+    }
+}
+
+function doElementsCollide(el1, el2) {
+    const el1X = parseInt(el1El.style.left);
+    const el1Y = parseInt(el1El.style.top);
+    const el2X = parseInt(el2El.style.left);
+    const el2Y = parseInt(el2El.style.top);
+
+    return el1X === el2X && el1Y === el2Y;
+}</pre>
                 </div>
                 <!-- }}} -->
             </section>

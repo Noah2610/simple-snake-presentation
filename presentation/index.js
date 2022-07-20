@@ -1,3 +1,5 @@
+const REPO_URL = "https://github.com/Noah2610/simple-snake-presentation";
+
 let ACTIVE_SLIDE = 0;
 let SLIDE_COUNT = 0;
 
@@ -7,14 +9,23 @@ function mod(n1, n2) {
 }
 
 function main() {
-    SLIDE_COUNT = document.querySelectorAll(".slide").length;
-
     setupCopyCode();
-
-    setActiveSlide(getSlideIdFromUrl() ?? ACTIVE_SLIDE);
+    setupSlideCount();
 
     document.addEventListener("keydown", onKeyDown);
     // document.addEventListener("click", nextSlide);
+}
+
+function setupSlideCount() {
+    SLIDE_COUNT = document.querySelectorAll(".slide").length;
+
+    const slideNumberEls = document.querySelectorAll(".slide > .slide-number");
+    slideNumberEls.forEach((slideNumberEl, i) => {
+        slideNumberEl.setAttribute("href", `${REPO_URL}/tree/slide-${i + 1}`);
+        slideNumberEl.innerHTML = `/${SLIDE_COUNT}`;
+    });
+
+    setActiveSlide(getSlideIdFromUrl() ?? ACTIVE_SLIDE);
 }
 
 function getSlideIdFromUrl() {

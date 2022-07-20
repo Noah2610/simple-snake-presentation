@@ -9,16 +9,17 @@ body {
 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+
     font-family: monospace;
 }
 
 main {
     position: relative;
     width: 100%;
-    height: 100%;
-    max-width: 1200px;
-    max-height: 800px;
+    max-width: 1400px;
+    top: 1em;
+    /* max-height: 800px; */
     /* outline: 1px solid red; */
 
     counter-reset: slide-id;
@@ -48,6 +49,7 @@ ul > li > ul > li:first-child {
 h1 {
     margin-top: 0;
     margin-bottom: 0.25em;
+    font-size: 1.5em;
     letter-spacing: 0.1em;
 }
 
@@ -67,13 +69,22 @@ h1 {
     height: auto;
 }
 
-.slide::before {
-    counter-increment: slide-id;
-    content: counter(slide-id);
+.slide-number {
     position: absolute;
+    display: inline;
     right: 0;
     font-size: 1em;
-    font-weight: bold;
+    /* font-weight: bold; */
+
+    counter-increment: slide-id;
+}
+
+.slide-number::before {
+    content: counter(slide-id);
+}
+
+.slide-number--highlight {
+    animation: highlightSlideNumber 1000ms ease-in-out infinite alternate;
 }
 
 #game-frame {
@@ -111,16 +122,10 @@ pre.code {
     position: relative;
 }
 
-/* pre.code::before { */
-/*     content: "Copy"; */
-/*     position: absolute; */
-/*     top: 0; */
-/*     right: 0; */
-/*     margin-top: 0.25em; */
-/*     margin-right: 0.25em; */
-/*     color: #ffffff; */
-/*     cursor: pointer; */
-/* } */
+.code-highlight {
+    text-shadow: 0 0 8px;
+    font-weight: bold;
+}
 
 .code-file > .title {
     color: #ffffff;
@@ -157,4 +162,19 @@ pre.code {
 
 .text-slim {
     font-weight: 200;
+}
+
+@keyframes highlightSlideNumber {
+    0% {
+        text-shadow: 0 0 0;
+        transform: scale(1) rotate(-8deg);
+    }
+    100% {
+        text-shadow: 0 0 0.5em;
+        transform: scale(1.2) rotate(8deg);
+    }
+    /* 100% { */
+    /*     text-shadow: 0 0 0; */
+    /*     transform: scale(1); */
+    /* } */
 }
