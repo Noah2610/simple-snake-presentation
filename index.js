@@ -125,7 +125,7 @@ function handleFoodCollision() {
 
     if (isColliding) {
         randomizeFoodPosition();
-        // TODO: Spawn a new snake body!
+        spawnSnakeBody();
     }
 }
 
@@ -142,6 +142,20 @@ function randomizeFoodPosition() {
 
     foodEl.style.left = `${x}px`;
     foodEl.style.top = `${y}px`;
+}
+
+function spawnSnakeBody() {
+    const bodyContainerEl = document.getElementById("snake-bodies");
+    const lastBodyEl = bodyContainerEl.lastElementChild;
+
+    const newBodyEl = document.createElement("div");
+    newBodyEl.classList.add("entity", "snake-body");
+
+    // Set new body's position to the position of the last existing body element
+    newBodyEl.style.left = lastBodyEl.style.left;
+    newBodyEl.style.top = lastBodyEl.style.top;
+
+    bodyContainerEl.appendChild(newBodyEl);
 }
 
 // Use this function as the modulo (%) operator instead of the default operator.
