@@ -47,6 +47,7 @@ ul > li > ul > li:first-child {
 
 h1 {
     margin-top: 0;
+    margin-bottom: 0.25em;
     letter-spacing: 0.1em;
 }
 
@@ -147,7 +148,7 @@ pre.code {
 }
 
 .color-blue {
-    color: #4c869a;
+    color: #4f93a9;
 }
 
 .color-green {

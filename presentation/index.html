@@ -327,6 +327,226 @@ body { /* ... */ }
                 </div>
                 <!-- }}} -->
             </section>
+
+            <section class="slide">
+                <!-- {{{ -->
+                <h1>Setup JavaScript and Game Loop</h1>
+
+                <div class="code-file">
+                    <code class="code title">index.js</code>
+                    <pre class="code body color-blue">
+// Used to keep track of current frame number.
+let FRAME = 0;
+
+function main() {
+    window.requestAnimationFrame(update);
+}
+
+function update() {
+    // We will put our game logic here...
+
+    // Call update() again once the browser
+    // is ready to redraw the page.
+    window.requestAnimationFrame(update);
+
+    FRAME++;
+}
+
+// Start our game once the page has loaded.
+window.onload = main;</pre
+                    >
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide">
+                <!-- {{{ -->
+                <h1>Move Snake Head</h1>
+
+                <div class="code-file">
+                    <code class="code title">index.js</code>
+                    <pre class="code body color-blue">
+function update() {
+    // MOVE SNAKE HEAD
+    // Only move every 30 frames.
+    if (FRAME % 30 === 0) {
+        const headEl = document.getElementById("snake-head");
+
+        let x = parseInt(headEl.style.left) || 0;
+        let y = parseInt(headEl.style.top) || 0;
+
+        // Only move right for now...
+        x += 32;
+
+        headEl.style.left = `${x}px`;
+        headEl.style.top = `${y}px`;
+    }
+
+    /* ... */
+}</pre
+                    >
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide">
+                <!-- {{{ -->
+                <h1>Move Snake Bodies</h1>
+
+                <div class="code-file">
+                    <code class="code title">index.js</code>
+                    <pre class="code body color-blue body--small">
+function update() {
+    if (FRAME % 30 === 0) {
+        // MOVE SNAKE BODIES
+        const headEl = document.getElementById("snake-head");
+        const bodyEls = document.getElementsByClassName("snake-body");
+
+        // Loop through body elements BACKWARDS.
+        for (let i = bodyEls.length - 1; i >= 0; i--) {
+            const bodyEl = bodyEls[i];
+            const prevBodyEl = bodyEls[i - 1] || headEl;
+
+            // Set position of previous body element, or of head element.
+            bodyEl.style.left = prevBodyEl.style.left;
+            bodyEl.style.top = prevBodyEl.style.top;
+        }
+
+        /* ... (move snake head) ... */
+        // Note, that we move the BODIES first and the HEAD afterwards.
+        // This allows for the first body to copy the OLD position of the head,
+        // then when the head updates it moves to its NEW position.
+        // This way, the body elements will "lag behind" by one position.
+    }
+
+    /* ... */
+}</pre
+                    >
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide">
+                <!-- {{{ -->
+                <h1>Refactor Snake Movement Code</h1>
+
+                <div class="code-file">
+                    <code class="code title">index.js</code>
+                    <pre class="code body color-blue body--small">
+function update() {
+    if (FRAME % 30 === 0) {
+        moveSnakeBodies();
+        moveSnakeHead();
+    }
+
+    /* ... */
+}
+
+// Let's move our movement code into two separate functions;
+// one for moving the head moveSnakeHead(), and one for
+// the bodies moveSnakeBodies().
+// This allows our update() function to stay nice and clean.
+
+function moveSnakeHead() {
+    /* ... */
+}
+
+function moveSnakeBodies() {
+    /* ... */
+}
+</pre
+                    >
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide">
+                <!-- {{{ -->
+                <h1>Move Snake in different directions</h1>
+
+                <div class="code-file">
+                    <code class="code title">index.js</code>
+                    <pre class="code body color-blue body--small">
+// Keep track of the direction our snake is moving into.
+// One of "up", "down", "left", or "right".
+let SNAKE_DIRECTION = "right";
+// Our step size for moving our snake.
+const STEP = 32;
+
+function moveSnakeHead() {
+    /* ... */
+
+    switch (SNAKE_DIRECTION) {
+        case "up": {
+            y -= STEP;
+            break;
+        }
+        case "down": {
+            y += STEP;
+            break;
+        }
+        case "left": {
+            x -= STEP;
+            break;
+        }
+        case "right": {
+            x += STEP;
+            break;
+        }
+    }
+
+    snakeEl.style.left = `${x}px`;
+    snakeEl.style.top = `${y}px`;
+}</pre
+                    >
+                </div>
+                <!-- }}} -->
+            </section>
+
+            <section class="slide">
+                <!-- {{{ -->
+                <h1>User Input</h1>
+
+                <div class="code-file">
+                    <code class="code title">index.js</code>
+                    <pre class="code body color-blue body--small">
+function main() {
+    // Call the onKeyDown() function when the user presses a key.
+    document.addEventListener("keydown", onKeyDown);
+
+    /* ... */
+}
+
+function onKeyDown(event) {
+    const key = event.key.toLowerCase();
+    switch (key) {
+        case "W":
+            // We aren't allowed to move in the opposite direction.
+            if (SNAKE_DIRECTION !== "down") {
+                SNAKE_DIRECTION = "up";
+            }
+            break;
+        case "S":
+            if (SNAKE_DIRECTION !== "up") {
+                SNAKE_DIRECTION = "down";
+            }
+            break;
+        case "A":
+            if (SNAKE_DIRECTION !== "right") {
+                SNAKE_DIRECTION = "left";
+            }
+            break;
+        case "D":
+            if (SNAKE_DIRECTION !== "left") {
+                SNAKE_DIRECTION = "right";
+            }
+            break;
+    }
+}</pre
+                    >
+                </div>
+                <!-- }}} -->
+            </section>
         </main>
 
         <script type="text/javascript" src="./index.js"></script>
