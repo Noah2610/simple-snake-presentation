@@ -859,16 +859,16 @@ function handleFoodCollision() {
 function handleBodyCollision() {
     /* ... */
 
-    const inCollision = <span class="code-highlight">doElementsCollide(headEl, BodyEl);</span>
+    const inCollision = <span class="code-highlight">doElementsCollide(headEl, bodyEl);</span>
 
     /* ... */
 }
 
 function doElementsCollide(el1, el2) {
-    const el1X = parseInt(el1El.style.left);
-    const el1Y = parseInt(el1El.style.top);
-    const el2X = parseInt(el2El.style.left);
-    const el2Y = parseInt(el2El.style.top);
+    const el1X = parseInt(el1.style.left);
+    const el1Y = parseInt(el1.style.top);
+    const el2X = parseInt(el2.style.left);
+    const el2Y = parseInt(el2.style.top);
 
     return el1X === el2X && el1Y === el2Y;
 }</pre>
