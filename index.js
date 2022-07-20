@@ -1,3 +1,4 @@
+let IS_RUNNING = true;
 // Used to keep track of current frame number.
 let FRAME = 0;
 // Keep track of the direction our snake is moving into.
@@ -46,6 +47,12 @@ function onKeyDown(event) {
 }
 
 function update() {
+    // Don't perform any more updates once the IS_RUNNING flag is set to false.
+    // This effectively stops the game.
+    if (!IS_RUNNING) {
+        return;
+    }
+
     // Only move every 30 frames.
     if (FRAME % 30 === 0) {
         moveSnakeBodies();
@@ -135,10 +142,7 @@ function handleBodyCollision() {
         const inCollision = doElementsCollide(headEl, bodyEl);
 
         if (inCollision) {
-            // GAME OVER!
-            // For now we just crash the game by throwing a string.
-            // This will stop the game...
-            throw "Game Over!";
+            gameOver();
         }
     }
 }
@@ -194,6 +198,14 @@ function spawnSnakeBody() {
     newBodyEl.style.top = lastBodyEl.style.top;
 
     bodyContainerEl.appendChild(newBodyEl);
+}
+
+function gameOver() {
+    // Show the game-over element by removing its "hidden" class.
+    const gameOverEl = document.getElementById("game-over");
+    gameOverEl.classList.remove("hidden");
+
+    IS_RUNNING = false;
 }
 
 function doElementsCollide(el1, el2) {
