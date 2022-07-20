@@ -1,5 +1,10 @@
 const REPO_URL = "https://github.com/Noah2610/simple-snake-presentation";
 
+const CONTROLS = {
+    nextSlide: ["ArrowRight", "n", "d"],
+    prevSlide: ["ArrowLeft", "p", "a"],
+};
+
 let ACTIVE_SLIDE = 0;
 let SLIDE_COUNT = 0;
 
@@ -11,6 +16,7 @@ function mod(n1, n2) {
 function main() {
     setupCopyCode();
     setupSlideCount();
+    setupShowKeybindings();
 
     document.addEventListener("keydown", onKeyDown);
     // document.addEventListener("click", nextSlide);
@@ -28,10 +34,41 @@ function setupSlideCount() {
     setActiveSlide(getSlideIdFromUrl() ?? ACTIVE_SLIDE);
 }
 
+function setupShowKeybindings() {
+    const keybindingsEl = document.querySelector(".keybindings");
+    const keybindingsCloseEl = keybindingsEl.querySelector(
+        ".keybindings__close"
+    );
+    const keybindingsNextEl = keybindingsEl.querySelector(
+        "#keybindings-next-slide"
+    );
+    const keybindingsPrevEl = keybindingsEl.querySelector(
+        "#keybindings-prev-slide"
+    );
+
+    const join = (keys) => keys.join(" ");
+
+    keybindingsNextEl.innerHTML = join(CONTROLS.nextSlide);
+    keybindingsPrevEl.innerHTML = join(CONTROLS.prevSlide);
+
+    keybindingsCloseEl.onclick = () => {
+        keybindingsEl.classList.add("hidden");
+        removeQueryParam("keybindings");
+    };
+
+    const isVisible = getQueryParam("keybindings");
+    if (!isVisible) return;
+
+    keybindingsEl.classList.remove("hidden");
+}
+
 function getSlideIdFromUrl() {
-    const params = getQueryParams();
-    const slideId = parseInt(params["slide"]);
+    const slideId = parseInt(getQueryParam("slide"));
     return Number.isNaN(slideId) ? null : slideId - 1;
+}
+
+function getQueryParam(key) {
+    return getQueryParams()[key];
 }
 
 function getQueryParams() {
@@ -50,26 +87,22 @@ function setQueryParam(key, value) {
     const params = new URLSearchParams(location.search);
     params.set(key, value.toString());
     const newPath = location.pathname + "?" + params.toString();
+    history.replaceState(null, "", newPath);
+}
+
+function removeQueryParam(key) {
+    const params = new URLSearchParams(location.search);
+    params.delete(key);
+    const newPath = location.pathname + "?" + params.toString();
     history.pushState(null, "", newPath);
 }
 
 function onKeyDown(event) {
     const key = event.key;
-    switch (key) {
-        case "n":
-        case "d":
-        case "j":
-        case "ArrowRight": {
-            nextSlide();
-            break;
-        }
-        case "p":
-        case "a":
-        case "k":
-        case "ArrowLeft": {
-            prevSlide();
-            break;
-        }
+    if (CONTROLS.nextSlide.some((k) => k === key)) {
+        nextSlide();
+    } else if (CONTROLS.prevSlide.some((k) => k === key)) {
+        prevSlide();
     }
 }
 

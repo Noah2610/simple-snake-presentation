@@ -7,6 +7,25 @@
         <link rel="stylesheet" href="./style.css" />
     </head>
     <body>
+        <div class="keybindings hidden">
+            <!-- {{{ -->
+            <div class="keybindings__close">X</div>
+
+            <h2>Keybindings</h2>
+
+            <p>
+                Next slide:
+                <br />
+                <code id="keybindings-next-slide" class="code"></code>
+            </p>
+            <p>
+                Previous slide:
+                <br />
+                <code id="keybindings-prev-slide" class="code"></code>
+            </p>
+            <!-- }}} -->
+        </div>
+
         <main>
             <section class="slide">
                 <!-- {{{ -->
@@ -142,7 +161,8 @@
                 <p class="text-slim">
                     Open up these slides at
                     <br />
-                    <a href="https://simple-snake-slides-noahro.vercel.app/"
+                    <a
+                        href="https://simple-snake-slides-noahro.vercel.app/?slide=3&keybindings=1"
                         >simple-snake-slides-noahro.vercel.app</a
                     >
                     <br />
