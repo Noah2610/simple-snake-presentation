@@ -6,7 +6,20 @@ function main() {
 }
 
 function update() {
-    // We will put our game logic here...
+    // MOVE SNAKE HEAD
+    // Only move every 30 frames.
+    if (FRAME % 30 === 0) {
+        const headEl = document.getElementById("snake-head");
+
+        let x = parseInt(headEl.style.left) || 0;
+        let y = parseInt(headEl.style.top) || 0;
+
+        // Only move right for now...
+        x += 32;
+
+        headEl.style.left = `${x}px`;
+        headEl.style.top = `${y}px`;
+    }
 
     // Call update() again once the browser
     // is ready to redraw the page.
