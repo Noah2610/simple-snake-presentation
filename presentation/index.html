@@ -448,6 +448,8 @@ function update() {
 // This allows our update() function to stay nice and clean.
 
 function moveSnakeHead() {
+    const headEl = document.getElementById("snake-head");
+
     /* ... */
 }
 
@@ -520,23 +522,23 @@ function main() {
 function onKeyDown(event) {
     const key = event.key.toLowerCase();
     switch (key) {
-        case "W":
+        case "w":
             // We aren't allowed to move in the opposite direction.
             if (SNAKE_DIRECTION !== "down") {
                 SNAKE_DIRECTION = "up";
             }
             break;
-        case "S":
+        case "s":
             if (SNAKE_DIRECTION !== "up") {
                 SNAKE_DIRECTION = "down";
             }
             break;
-        case "A":
+        case "a":
             if (SNAKE_DIRECTION !== "right") {
                 SNAKE_DIRECTION = "left";
             }
             break;
-        case "D":
+        case "d":
             if (SNAKE_DIRECTION !== "left") {
                 SNAKE_DIRECTION = "right";
             }
